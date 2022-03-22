@@ -43,19 +43,155 @@ class HomeScreenWidget extends StatelessWidget {
           const Text(
             "Let's gets somethings?",
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 17,
               color: Colors.grey,
             ),
           ),
           const SizedBox(
             height: 16,
           ),
-          Container(
-            constraints: BoxConstraints.expand(
-                width: screenSize.width, height: screenSize.height * 0.2),
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-                color: Colors.deepOrangeAccent),
+          SizedBox(
+              height: screenSize.height * 0.2,
+              child: const ShoppingAdvertListView()),
+          const SizedBox(
+            height: 32,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text("Top Categories",
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold)),
+              const Text("SEE ALL",
+                  style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.deepOrangeAccent,
+                      fontWeight: FontWeight.bold)),
+            ],
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          const SizedBox(height: 40, child: ShoppingCategoriesWidget()),
+          Expanded(child: ShoppingListWidget()),
+        ],
+      ),
+    ));
+  }
+}
+
+class ShoppingListWidget extends StatelessWidget {
+  const ShoppingListWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, crossAxisSpacing: 8, mainAxisSpacing: 8),
+      itemBuilder: (context, index) {
+        return const ShoppingItemThumbnail();
+      },
+      itemCount: 4,
+    );
+  }
+}
+
+class ShoppingCategoriesWidget extends StatefulWidget {
+  const ShoppingCategoriesWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<ShoppingCategoriesWidget> createState() =>
+      _ShoppingCategoriesWidgetState();
+}
+
+class _ShoppingCategoriesWidgetState extends State<ShoppingCategoriesWidget> {
+  int clickedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    const List categoryImages = [
+      AssetImage('shopping_app_assets/wristwatch.png'),
+      AssetImage('shopping_app_assets/tshirt.png'),
+      AssetImage('shopping_app_assets/sneakers.png'),
+      AssetImage('shopping_app_assets/school_bag.png'),
+      AssetImage('shopping_app_assets/wristwatch.png'),
+      AssetImage('shopping_app_assets/tshirt.png'),
+      AssetImage('shopping_app_assets/sneakers.png'),
+      AssetImage('shopping_app_assets/school_bag.png'),
+    ];
+
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) {
+        return InkWell(
+          child: (index == clickedIndex)
+              ? Container(
+                  alignment: Alignment.center,
+                  height: 40,
+                  width: 40,
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      color: Colors.deepOrangeAccent),
+                  // child: ImageIcon(
+                  //   categoryImages[index],
+                  //   color: Colors.white,
+                  //   size: 24,
+                  // ),
+                  child: const Icon(
+                    Icons.accessibility,
+                    color: Colors.white,
+                  ),
+                )
+              : Container(
+                  alignment: Alignment.center,
+                  height: 40,
+                  width: 40,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                      color: Color(0xFFf4f0ec)),
+                  child: const Icon(
+                    Icons.accessibility,
+                    color: Colors.grey,
+                  ),
+                ),
+          onTap: () {
+            setState(() {
+              clickedIndex = index;
+            });
+          },
+        );
+      },
+      itemCount: 8,
+      separatorBuilder: (BuildContext context, int index) {
+        return SizedBox(width: 16);
+      },
+    );
+  }
+}
+
+class ShoppingAdvertListView extends StatelessWidget {
+  const ShoppingAdvertListView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    const List listOfColor = [Colors.deepOrangeAccent, Colors.blue];
+    return ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Container(
+            constraints: BoxConstraints.expand(width: screenSize.width * 0.7),
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
+                color: listOfColor[index]),
             child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
@@ -92,111 +228,11 @@ class HomeScreenWidget extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          const SizedBox(
-            height: 32,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text("Top Categories",
-                  style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold)),
-              const Text("SEE ALL",
-                  style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.deepOrangeAccent,
-                      fontWeight: FontWeight.bold)),
-            ],
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          const Expanded(child: ShoppingCategoriesWidget()),
-          Expanded(child: ShoppingListWidget()),
-        ],
-      ),
-    ));
-  }
-}
-
-class ShoppingListWidget extends StatelessWidget {
-  const ShoppingListWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate:
-          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 8, mainAxisSpacing: 8),
-      itemBuilder: (context, index) {
-        return const ShoppingItemThumbnail();
-      },
-      itemCount: 4,
-    );
-  }
-}
-
-class ShoppingCategoriesWidget extends StatefulWidget {
-  const ShoppingCategoriesWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<ShoppingCategoriesWidget> createState() =>
-      _ShoppingCategoriesWidgetState();
-}
-
-class _ShoppingCategoriesWidgetState extends State<ShoppingCategoriesWidget> {
-  int clickedIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.separated(
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        return InkWell(
-          child: (index == clickedIndex)
-              ? Container(
-                  height: 40,
-                  width: 40,
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 10.0),
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(16)),
-                      color: Colors.deepOrangeAccent),
-                  child: const Icon(
-                    Icons.accessibility,
-                    color: Colors.white,
-                  ),
-                )
-              : Container(
-                  height: 40,
-                  width: 40,
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 10.0),
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(16)),
-                      color: Colors.grey.withOpacity(0.2)),
-                  child: const Icon(
-                    Icons.accessibility,
-                    color: Colors.grey,
-                  ),
-                ),
-          onTap: () {
-            setState(() {
-              clickedIndex = index;
-            });
-          },
-        );
-      },
-      itemCount: 10,
-      separatorBuilder: (BuildContext context, int index) {
-        return SizedBox(width: 16);
-      },
-    );
+          );
+        },
+        itemCount: 2,
+        separatorBuilder: (BuildContext context, int index) {
+          return SizedBox(width: 8);
+        });
   }
 }

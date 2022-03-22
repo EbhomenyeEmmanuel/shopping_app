@@ -13,14 +13,15 @@ class _ShoppingItemThumbnailState extends State<ShoppingItemThumbnail> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
-          color: Colors.grey.withOpacity(0.2)),
+          color: Color(0xFFf4f0ec)),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -33,13 +34,12 @@ class _ShoppingItemThumbnailState extends State<ShoppingItemThumbnail> {
                   child: Text(
                     "30% OFF",
                     style: TextStyle(
-                        color: Colors.black.withOpacity(0.5),
+                        color: Colors.black,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(
-                      _isFavorited ? Icons.favorite : Icons.favorite_border),
+                  icon: const Icon( Icons.favorite),
                   iconSize: 30,
                   color: _isFavorited ? Colors.red : Colors.grey,
                   onPressed: () {
@@ -51,6 +51,52 @@ class _ShoppingItemThumbnailState extends State<ShoppingItemThumbnail> {
               ],
             ),
           ),
+          Expanded(
+              child: Container(
+            height: 150,
+            //child: ClipRect(child: Image.asset("shopping_app_assets/watch.webp")),
+          )),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(16),
+                    bottomRight: Radius.circular(16)),
+                color: Colors.white),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Apple Watch - M2",
+                  style: TextStyle(
+                      color: Colors.black.withOpacity(0.5),
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "N100",
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: 4,
+                    ),
+                    Text(
+                      "N130",
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.black.withOpacity(0.5),
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
