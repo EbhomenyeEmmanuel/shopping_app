@@ -126,6 +126,18 @@ class _ShoppingCategoriesWidgetState extends State<ShoppingCategoriesWidget> {
       AssetImage('shopping_app_assets/school_bag.png'),
     ];
 
+    const List categoryIcons = [
+      Icons.watch,
+      Icons.shopping_bag,
+      Icons.watch,
+      Icons.shopping_bag,
+      Icons.watch,
+      Icons.shopping_bag,
+      Icons.watch,
+      Icons.shopping_bag,
+      Icons.watch,
+    ];
+
     return ListView.separated(
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
@@ -144,8 +156,8 @@ class _ShoppingCategoriesWidgetState extends State<ShoppingCategoriesWidget> {
                   //   color: Colors.white,
                   //   size: 24,
                   // ),
-                  child: const Icon(
-                    Icons.accessibility,
+                  child: Icon(
+                    categoryIcons[index],
                     color: Colors.white,
                   ),
                 )
@@ -154,11 +166,11 @@ class _ShoppingCategoriesWidgetState extends State<ShoppingCategoriesWidget> {
                   height: 40,
                   width: 40,
                   padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
                       color: Color(0xFFf4f0ec)),
-                  child: const Icon(
-                    Icons.accessibility,
+                  child: Icon(
+                    categoryIcons[index],
                     color: Colors.grey,
                   ),
                 ),
@@ -169,9 +181,9 @@ class _ShoppingCategoriesWidgetState extends State<ShoppingCategoriesWidget> {
           },
         );
       },
-      itemCount: 8,
+      itemCount: categoryIcons.length,
       separatorBuilder: (BuildContext context, int index) {
-        return SizedBox(width: 16);
+        return const SizedBox(width: 16);
       },
     );
   }
