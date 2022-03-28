@@ -242,6 +242,7 @@ class _ShoppingItemDetailState extends State<ShoppingItemDetail> {
             height: 24,
           ),
           MaterialButton(
+            padding: const EdgeInsets.all(16),
             minWidth: screenSize.width,
             color: Colors.deepOrangeAccent,
             onPressed: () {},
