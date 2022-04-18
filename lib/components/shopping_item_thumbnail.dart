@@ -298,22 +298,17 @@ class _ShoppingItemSizeListViewState extends State<ShoppingItemSizeListView> {
                     style: const TextStyle(color: Colors.deepOrangeAccent),
                   ))
               : Container(
-                  padding: const EdgeInsets.all(1),
+                  alignment: Alignment.center,
+                  width: 40,
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.withOpacity(0.5)),
                       borderRadius: const BorderRadius.all(Radius.circular(8)),
-                      color: Colors.grey.withOpacity(0.5)),
-                  child: Container(
-                      alignment: Alignment.center,
-                      width: 40,
-                      padding: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
-                          color: Color(0xFFf4f0ec)),
-                      child: Text(
-                        widget._sizesList[index],
-                        style: const TextStyle(color: Colors.black),
-                      )),
-                ),
+                      color: const Color(0xFFf4f0ec)),
+                  child: Text(
+                    widget._sizesList[index],
+                    style: const TextStyle(color: Colors.black),
+                  )),
           onTap: () {
             setState(() {
               clickedIndex = index;
