@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../palette.dart';
+
 class ShoppingAdvertListView extends StatelessWidget {
   const ShoppingAdvertListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    const List listOfColor = [Colors.deepOrangeAccent, Colors.blue];
+   const List listOfColor = [Palette.primaryColor, Colors.blue];
     return SizedBox(
       height: screenSize.height * 0.2,
       child: ListView.separated(

@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../palette.dart';
+import 'home.dart';
+import 'home_provider.dart';
 
-class ShoppingCategoriesWidget extends StatefulWidget {
+class ShoppingCategoriesWidget extends StatelessWidget {
   const ShoppingCategoriesWidget({
     Key? key,
   }) : super(key: key);
-
-  @override
-  State<ShoppingCategoriesWidget> createState() =>
-      _ShoppingCategoriesWidgetState();
-}
-
-class _ShoppingCategoriesWidgetState extends State<ShoppingCategoriesWidget> {
-  int clickedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -40,53 +36,53 @@ class _ShoppingCategoriesWidgetState extends State<ShoppingCategoriesWidget> {
 
     return SizedBox(
       height: 40,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return InkWell(
-            child: (index == clickedIndex)
-                ? Container(
-              alignment: Alignment.center,
-              height: 40,
-              width: 40,
-              padding: const EdgeInsets.all(8.0),
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                  color: Colors.deepOrangeAccent),
-              // child: ImageIcon(
-              //   categoryImages[index],
-              //   color: Colors.white,
-              //   size: 24,
-              // ),
-              child: Icon(
-                categoryIcons[index],
-                color: Colors.white,
-              ),
-            )
-                : Container(
-              alignment: Alignment.center,
-              height: 40,
-              width: 40,
-              padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                  color: Color(0xFFf4f0ec)),
-              child: Icon(
-                categoryIcons[index],
-                color: Colors.grey,
-              ),
-            ),
-            onTap: () {
-              setState(() {
-                clickedIndex = index;
-              });
-            },
-          );
-        },
-        itemCount: categoryIcons.length,
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(width: 16);
-        },
+      child: Consumer<HomeProvider>(
+        builder: (context, provider, _) => ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return InkWell(
+              child: (index == provider.shoppingCategoryPosition)
+                  ? Container(
+                      alignment: Alignment.center,
+                      height: 40,
+                      width: 40,
+                      padding: const EdgeInsets.all(8.0),
+                      decoration:  const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          color: Palette.primaryColor),
+                      // child: ImageIcon(
+                      //   categoryImages[index],
+                      //   color: Colors.white,
+                      //   size: 24,
+                      // ),
+                      child: Icon(
+                        categoryIcons[index],
+                        color: Colors.white,
+                      ),
+                    )
+                  : Container(
+                      alignment: Alignment.center,
+                      height: 40,
+                      width: 40,
+                      padding: const EdgeInsets.all(8),
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          color: Color(0xFFf4f0ec)),
+                      child: Icon(
+                        categoryIcons[index],
+                        color: Colors.grey,
+                      ),
+                    ),
+              onTap: () {
+                provider.setShoppingCategoryPosition(index);
+              },
+            );
+          },
+          itemCount: categoryIcons.length,
+          separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(width: 16);
+          },
+        ),
       ),
     );
   }

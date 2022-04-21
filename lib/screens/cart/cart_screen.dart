@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app/screens/cart/cart.dart';
 
-class ShoppingCartScreen extends StatelessWidget {
-  const ShoppingCartScreen({
+class CartScreen extends StatelessWidget {
+  const CartScreen({
     Key? key,
   }) : super(key: key);
 

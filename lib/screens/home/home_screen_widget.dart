@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../palette.dart';
 import 'home.dart';
 
 class HomeScreenWidget extends StatelessWidget {
@@ -66,7 +67,7 @@ class HomeScreenWidget extends StatelessWidget {
               Text("SEE ALL",
                   style: TextStyle(
                       fontSize: 14,
-                      color: Colors.deepOrangeAccent,
+                      color: Palette.primaryColor,
                       fontWeight: FontWeight.bold)),
             ],
           ),
