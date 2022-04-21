@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_app/screens/home_screen_widget.dart';
-import 'package:shopping_app/screens/shopping_cart_screen.dart';
+import 'package:shopping_app/screens/home/home_screen_widget.dart';
+import 'package:shopping_app/screens/cart/shopping_cart_screen.dart';
 
 void main() {
   runApp(const ShoppingApp());
