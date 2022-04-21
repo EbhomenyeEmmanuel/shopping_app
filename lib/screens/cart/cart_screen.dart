@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopping_app/screens/cart/cart.dart';
 
 class CartScreen extends StatelessWidget {
@@ -39,41 +40,40 @@ class CartScreen extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
+              children: [
+                const Text(
                   "Total",
                   style: TextStyle(
                       color: Colors.grey, fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  "N300",
-                  style: TextStyle(
-                      color: Colors.deepOrangeAccent,
-                      fontWeight: FontWeight.bold),
-                )
+                Consumer<ShoppingCartProvider>(builder: (context, provider, _) {
+                  provider.calculateTotalPrice();
+                  return Text(
+                    "N${provider.totalPrice}",
+                    style: const TextStyle(
+                        color: Colors.deepOrangeAccent,
+                        fontWeight: FontWeight.bold),
+                  );
+                })
               ],
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            MaterialButton(
-              padding: const EdgeInsets.all(16),
-              minWidth: screenSize.width,
-              color: Colors.deepOrangeAccent,
-              onPressed: () {},
-              textColor: Colors.white,
-              child: const Text("Buy Now"),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14.0),
+            Padding(
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              child: MaterialButton(
+                padding: const EdgeInsets.all(16),
+                minWidth: screenSize.width,
+                color: Colors.deepOrangeAccent,
+                onPressed: () {},
+                textColor: Colors.white,
+                child: const Text("Buy Now"),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14.0),
+                ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            )
           ],
         ),
       ),
     );
   }
 }
-

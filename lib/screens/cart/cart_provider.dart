@@ -6,7 +6,10 @@ import 'package:shopping_app/models/cart_item.dart';
 
 class ShoppingCartProvider extends ChangeNotifier {
   final List<CartItem> _populatedItems = CartRepository().populatedCartItems;
+
   //final List<CartItem> _items = [];
+
+  int totalPrice = 0;
 
   UnmodifiableListView<CartItem> get populatedCartItems =>
       UnmodifiableListView(_populatedItems);
@@ -33,6 +36,11 @@ class ShoppingCartProvider extends ChangeNotifier {
 
   void incrementNoOfItemsInCart(int index) {
     _populatedItems[index].noOfItems++;
+    notifyListeners();
+  }
+
+  void calculateTotalPrice() {
+    totalPrice = _populatedItems.fold(0, (previousValue, element) => (int.parse(element.price)) + previousValue);
     notifyListeners();
   }
 }
