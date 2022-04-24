@@ -1,20 +1,20 @@
 import 'dart:collection';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:shopping_app/data/home_repository.dart';
 import 'package:shopping_app/models/shopping_item.dart';
+import 'package:shopping_app/screens/favorites/favorite_provider.dart';
 
 class HomeProvider extends ChangeNotifier {
   final List<ShoppingItem> _items = HomeRepository().shoppingItems;
-  final List<ShoppingItem> _favoriteItems = [];
 
+  late final FavoriteProvider? favoriteProvider;
   int shoppingItemSize = 0;
   int shoppingCategoryPosition = 0;
 
-  UnmodifiableListView<ShoppingItem> get items => UnmodifiableListView(_items);
+  HomeProvider(this.favoriteProvider);
 
-  UnmodifiableListView<ShoppingItem> get favoriteItems =>
-      UnmodifiableListView(_favoriteItems);
+  UnmodifiableListView<ShoppingItem> get items => UnmodifiableListView(_items);
 
   void add(ShoppingItem item) {
     _items.add(item);
@@ -31,25 +31,9 @@ class HomeProvider extends ChangeNotifier {
     final item = _items[index];
     _items[index].isChecked = isFavorite;
     if (isFavorite) {
-      _addToFavorites(item);
+      favoriteProvider?.addToFavorites(item);
     } else {
-      _removeFromFavorites(item);
-    }
-    notifyListeners();
-  }
-
-  void _addToFavorites(ShoppingItem item) {
-    //Add & save
-    _favoriteItems.add(item);
-    notifyListeners();
-  }
-
-  void _removeFromFavorites(ShoppingItem item) {
-    for (final shoppingItem in _favoriteItems) {
-      if (shoppingItem.id == item.id) {
-        _favoriteItems.remove(item);
-        break;
-      }
+      favoriteProvider?.removeFromFavorites(item);
     }
     notifyListeners();
   }

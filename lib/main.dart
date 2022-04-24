@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/screens/cart/cart_provider.dart';
+import 'package:shopping_app/screens/favorites/favorite_provider.dart';
+import 'package:shopping_app/screens/favorites/favorite_screen.dart';
 import 'package:shopping_app/screens/home/home_provider.dart';
 import 'package:shopping_app/screens/home/home_screen_widget.dart';
 import 'package:shopping_app/screens/cart/cart_screen.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => HomeProvider()),
-    ChangeNotifierProvider(create: (context) => ShoppingCartProvider())
+    ChangeNotifierProvider(create: (context) => FavoriteProvider()),
+    ChangeNotifierProxyProvider<FavoriteProvider, HomeProvider>(
+      create: (context) => HomeProvider(null),
+      update: (BuildContext context, favoriteProvider,
+              HomeProvider? homeProvider) =>
+          HomeProvider(favoriteProvider),
+    ),
+    ChangeNotifierProvider(create: (context) => ShoppingCartProvider()),
   ], child: const ShoppingApp()));
 }
 
@@ -39,9 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var _currentIndex = 0;
   static List<Widget> pages = <Widget>[
     const HomeScreenWidget(),
-    Container(
-      color: Colors.green,
-    ),
+    const FavoriteScreen(),
     const CartScreen(),
     Container(
       color: Colors.white,

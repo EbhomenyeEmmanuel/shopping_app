@@ -16,6 +16,7 @@ class ShoppingItemThumbnail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //TODO(Shopping Item not checked when item is clicked.)
     return InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -55,6 +56,7 @@ class ShoppingItemThumbnail extends StatelessWidget {
                           ? Colors.red
                           : Colors.grey,
                       onPressed: () {
+                        final provider = Provider.of<HomeProvider>(context, listen: false);
                         provider.toggleFavoriteStatus(_itemIndex);
                       },
                     )
