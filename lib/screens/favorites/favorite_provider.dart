@@ -11,16 +11,12 @@ class FavoriteProvider extends ChangeNotifier {
       UnmodifiableListView(_favoriteItems);
 
   void addToFavorites(ShoppingItem item) {
-    if (!_favoriteItems.contains(item)) {
       _favoriteItems.add(item);
-    }
     notifyListeners();
   }
 
   void removeFromFavorites(ShoppingItem item) {
-    if (_favoriteItems.contains(item)) {
       _favoriteItems.remove(item);
-    }
     notifyListeners();
   }
 }
