@@ -11,10 +11,10 @@ void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => FavoriteProvider()),
     ChangeNotifierProxyProvider<FavoriteProvider, HomeProvider>(
-      create: (context) => HomeProvider(null),
+      create: (context) => HomeProvider(),
       update: (BuildContext context, favoriteProvider,
               HomeProvider? homeProvider) =>
-          HomeProvider(favoriteProvider),
+          homeProvider!..update(favoriteProvider),
     ),
     ChangeNotifierProvider(create: (context) => ShoppingCartProvider()),
   ], child: const ShoppingApp()));

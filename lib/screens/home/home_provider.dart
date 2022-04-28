@@ -8,11 +8,13 @@ import 'package:shopping_app/screens/favorites/favorite_provider.dart';
 class HomeProvider extends ChangeNotifier {
   final List<ShoppingItem> _items = HomeRepository().shoppingItems;
 
-  late final FavoriteProvider? favoriteProvider;
+  late FavoriteProvider? favoriteProvider;
   int shoppingItemSize = 0;
   int shoppingCategoryPosition = 0;
 
-  HomeProvider(this.favoriteProvider);
+  void update(FavoriteProvider favoriteProvider) {
+    this.favoriteProvider = favoriteProvider;
+  }
 
   UnmodifiableListView<ShoppingItem> get items => UnmodifiableListView(_items);
 

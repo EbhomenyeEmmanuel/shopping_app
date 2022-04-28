@@ -16,15 +16,14 @@ class ShoppingItemThumbnail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO(Shopping Item not checked when item is clicked.)
-    return InkWell(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Expanded(child: ShoppingItemDetail(_item));
-        }));
-      },
-      child: Consumer<HomeProvider>(
-        builder: (context, provider, _) => Container(
+    return Consumer<HomeProvider>(
+      builder: (context, provider, _) => InkWell(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return Expanded(child: ShoppingItemDetail(_item));
+          }));
+        },
+        child: Container(
           decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(16)),
               color: Color(0xFFf4f0ec)),
@@ -56,8 +55,7 @@ class ShoppingItemThumbnail extends StatelessWidget {
                           ? Colors.red
                           : Colors.grey,
                       onPressed: () {
-                        final provider = Provider.of<HomeProvider>(context, listen: false);
-                        provider.toggleFavoriteStatus(_itemIndex);
+                        Provider.of<HomeProvider>(context, listen: false).toggleFavoriteStatus(_itemIndex);
                       },
                     )
                   ],
