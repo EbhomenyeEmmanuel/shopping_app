@@ -15,5 +15,5 @@ class CartItem {
       required this.price,
       required this.description,
       required this.size,
-      required this.noOfItems});
+      this.noOfItems= 1});
 }

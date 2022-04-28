@@ -20,7 +20,7 @@ class ShoppingItemThumbnail extends StatelessWidget {
       builder: (context, provider, _) => InkWell(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Expanded(child: ShoppingItemDetail(_item));
+            return Expanded(child: ShoppingItemDetail(_item, _itemIndex));
           }));
         },
         child: Container(

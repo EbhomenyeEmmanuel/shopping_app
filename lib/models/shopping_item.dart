@@ -8,8 +8,10 @@ class ShoppingItem {
   final String availabilityDescription;
   final String description;
   final int discount;
-  final List<String> sizes;
+  final List<int> sizes;
   bool isChecked;
+  int chosenSizeIndex;
+  double rating;
 
   ShoppingItem(
       {required this.id,
@@ -22,5 +24,7 @@ class ShoppingItem {
       required this.description,
       required this.discount,
       required this.sizes,
-      required this.isChecked});
+      this.isChecked = false,
+      this.chosenSizeIndex = 0,
+      this.rating = 0});
 }

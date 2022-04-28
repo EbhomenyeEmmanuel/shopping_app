@@ -15,7 +15,7 @@ class HomeScreenWidget extends StatelessWidget {
     return Consumer<HomeProvider>(
       builder: (context, homeProvider, child) => Scaffold(
           body: Padding(
-        padding: const EdgeInsets.only(top: 32, left: 16, right: 16, bottom: 8),
+        padding: const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

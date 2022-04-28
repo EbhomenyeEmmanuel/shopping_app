@@ -9,7 +9,6 @@ A shopping app built with flutter.
 //TODO(
 //Use firebase to provide & update data,
 //switch home content based on current shopping category,
-//add favorite screen: Data is stored when Item is favorited in home, get favoriteItems in HomeProvider
 //Fix images not showing
 
 //)

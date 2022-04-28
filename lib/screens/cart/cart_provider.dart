@@ -5,29 +5,32 @@ import 'package:shopping_app/data/cart_repository.dart';
 import 'package:shopping_app/models/cart_item.dart';
 
 class ShoppingCartProvider extends ChangeNotifier {
-  final List<CartItem> _populatedItems = CartRepository().populatedCartItems;
+  //final List<CartItem> cartItems = CartRepository().populatedCartItems;
 
-  //final List<CartItem> _items = [];
+  final List<CartItem> _cartItems = [];
 
   int totalPrice = 0;
 
-  UnmodifiableListView<CartItem> get populatedCartItems =>
-      UnmodifiableListView(_populatedItems);
+  //UnmodifiableListView<CartItem> get populatedCartItems => UnmodifiableListView(cartItems);
 
-  //UnmodifiableListView<CartItem> get cartItems => UnmodifiableListView(_items);
+  UnmodifiableListView<CartItem> get cartItems => UnmodifiableListView(_cartItems);
 
   void add(CartItem item) {
-    _populatedItems.add(item);
+    _cartItems.add(item);
     notifyListeners();
   }
 
   void removeAll() {
-    _populatedItems.clear();
+    _cartItems.clear();
     notifyListeners();
   }
 
+  void payForItemsInCart(){
+    removeAll();
+  }
+
   void decrementNoOfItemsInCart(int index) {
-    final item = _populatedItems[index];
+    final item = _cartItems[index];
     if (item.noOfItems > 1) {
       item.noOfItems--;
     }
@@ -35,12 +38,12 @@ class ShoppingCartProvider extends ChangeNotifier {
   }
 
   void incrementNoOfItemsInCart(int index) {
-    _populatedItems[index].noOfItems++;
+    _cartItems[index].noOfItems++;
     notifyListeners();
   }
 
   void calculateTotalPrice() {
-    totalPrice = _populatedItems.fold(0, (previousValue, element) => (int.parse(element.price)) + previousValue);
+    totalPrice = _cartItems.fold(0, (previousValue, element) => (int.parse(element.price)) + previousValue);
     notifyListeners();
   }
 }

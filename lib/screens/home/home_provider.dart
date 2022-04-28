@@ -9,7 +9,7 @@ class HomeProvider extends ChangeNotifier {
   final List<ShoppingItem> _items = HomeRepository().shoppingItems;
 
   late FavoriteProvider? favoriteProvider;
-  int shoppingItemSize = 0;
+  int selectedShoppingItemSizeIndex = 0;
   int shoppingCategoryPosition = 0;
 
   void update(FavoriteProvider favoriteProvider) {
@@ -29,6 +29,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void toggleFavoriteStatus(int index) {
+    //TODO(Removing an item in a random order causes an old state in the list)
     final isFavorite = !_items[index].isChecked;
     final item = _items[index];
     _items[index].isChecked = isFavorite;
@@ -40,9 +41,26 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setShoppingItemSize(int size) {
-    shoppingItemSize = size;
+  void setSelectedShoppingItemSize(int index, int shoppingItemSizeIndex) {
+    selectedShoppingItemSizeIndex = shoppingItemSizeIndex;
+    final currentItem = _items[index];
+    final currentChosenSizeItem = currentItem.sizes[shoppingItemSizeIndex];
+    currentItem.chosenSizeIndex = currentChosenSizeItem;
     notifyListeners();
+  }
+
+  int getSelectedShoppingItemSize(int index) {
+    return _items[index].sizes[selectedShoppingItemSizeIndex];
+  }
+
+  void setShoppingItemRating(int index, double shoppingItemRating) {
+    final currentItem = _items[index];
+    currentItem.rating = shoppingItemRating;
+    notifyListeners();
+  }
+
+  double getInitialShoppingItemRating(int index) {
+    return _items[index].rating;
   }
 
   void setShoppingCategoryPosition(int position) {

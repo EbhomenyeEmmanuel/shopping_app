@@ -4,12 +4,13 @@ import 'package:shopping_app/screens/home/home_provider.dart';
 import 'package:shopping_app/screens/palette.dart';
 
 class ShoppingItemSizeListView extends StatelessWidget {
-  final List<String> _sizesList;
+  final List<int> _sizesList;
+  final int _itemIndex; //Replace Index ,search with ID
 
   const ShoppingItemSizeListView(
-    List<String> sizesList, {
+    List<int> sizesList, int itemIndex,{
     Key? key,
-  })  : _sizesList = sizesList,
+  })  : _sizesList = sizesList, _itemIndex = itemIndex,
         super(key: key);
 
   @override
@@ -17,9 +18,9 @@ class ShoppingItemSizeListView extends StatelessWidget {
     return Consumer<HomeProvider>(
       builder: (context, provider, _) => ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
+        itemBuilder: (context, indexFromSizesList) {
           return InkWell(
-            child: (index == provider.shoppingItemSize)
+            child: (indexFromSizesList == provider.selectedShoppingItemSizeIndex)
                 ? Container(
                     alignment: Alignment.center,
                     height: 41,
@@ -30,7 +31,7 @@ class ShoppingItemSizeListView extends StatelessWidget {
                             const BorderRadius.all(Radius.circular(8)),
                         color: Palette.primaryColor.withOpacity(0.5)),
                     child: Text(
-                      _sizesList[index],
+                      _sizesList[indexFromSizesList].toString(),
                       style: const TextStyle(color: Palette.primaryColor),
                     ))
                 : Container(
@@ -43,11 +44,11 @@ class ShoppingItemSizeListView extends StatelessWidget {
                             const BorderRadius.all(Radius.circular(8)),
                         color: const Color(0xFFf4f0ec)),
                     child: Text(
-                      _sizesList[index],
+                      _sizesList[indexFromSizesList].toString(),
                       style: const TextStyle(color: Colors.black),
                     )),
             onTap: () {
-              provider.setShoppingItemSize(index);
+              provider.setSelectedShoppingItemSize(_itemIndex, indexFromSizesList);
             },
           );
         },
