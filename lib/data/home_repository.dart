@@ -10,7 +10,7 @@ class HomeRepository {
       name: "Apple Watch - M2",
       noOfReviews: 0,
       newPrice: "100",
-      oldPrice: "N130",
+      oldPrice: "130",
       availabilityDescription: "Available in stock",
       description: "",
       discount: 30,
@@ -21,8 +21,8 @@ class HomeRepository {
       images: ["shopping_app_assets/watch_2.jpg"],
       name: "Apple Watch Series 7",
       noOfReviews: 200,
-      newPrice: "N140",
-      oldPrice: "N200",
+      newPrice: "140",
+      oldPrice: "200",
       availabilityDescription: "Available in stock",
       description: "The watch I got was really beautifully and trendy. "
           "It was the Ben 10 watch, which I am very fond of. "
@@ -35,8 +35,8 @@ class HomeRepository {
       images: ["shopping_app_assets/watch_2.jpg"],
       name: "Apple Watch Series 6",
       noOfReviews: 0,
-      newPrice: "N140",
-      oldPrice: "N200",
+      newPrice: "140",
+      oldPrice: "200",
       availabilityDescription: "Available in stock",
       description: "The watch I got was really beautifully and trendy. "
           "It was the Ben 10 watch, which I am very fond of. "
@@ -49,8 +49,8 @@ class HomeRepository {
       images: ["shopping_app_assets/watch_3.jpg"],
       name: "Apple Watch Series 6",
       noOfReviews: 0,
-      newPrice: "N140",
-      oldPrice: "N200",
+      newPrice: "140",
+      oldPrice: "200",
       availabilityDescription: "Available in stock",
       description: "The watch I got was really beautifully and trendy. "
           "It was the Ben 10 watch, which I am very fond of. "
@@ -63,8 +63,8 @@ class HomeRepository {
       images: ["shopping_app_assets/watch_4.jpg"],
       name: "Apple Watch Series 6",
       noOfReviews: 0,
-      newPrice: "N140",
-      oldPrice: "N200",
+      newPrice: "140",
+      oldPrice: "200",
       availabilityDescription: "Available in stock",
       description: "The watch I got was really beautifully and trendy. "
           "It was the Ben 10 watch, which I am very fond of. "
@@ -77,8 +77,8 @@ class HomeRepository {
       images: ["shopping_app_assets/watch_5.jpg"],
       name: "Apple Watch Series 6",
       noOfReviews: 0,
-      newPrice: "N140",
-      oldPrice: "N200",
+      newPrice: "140",
+      oldPrice: "200",
       availabilityDescription: "Available in stock",
       description: "The watch I got was really beautifully and trendy. "
           "It was the Ben 10 watch, which I am very fond of. "

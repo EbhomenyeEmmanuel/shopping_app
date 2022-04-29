@@ -58,7 +58,7 @@ class ShoppingCartItemThumbnail extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          _item.price,
+                          "N${_item.price}",
                           style: const TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,

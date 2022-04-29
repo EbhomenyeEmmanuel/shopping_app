@@ -5,3 +5,5 @@ export 'shopping_item_detail.dart';
 export 'home_provider.dart';
 export 'shopping_item_thumbnail.dart';
 export 'home_screen_widget.dart';
+export 'rating_bar_widget.dart';
+export 'shopping_item_image_carousel.dart';

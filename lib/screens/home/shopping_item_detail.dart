@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/models/cart_item.dart';
 import 'package:shopping_app/models/shopping_item.dart';
 
 import '../cart/cart_provider.dart';
-import '../palette.dart';
+import '../shared/shopping_button.dart';
 import 'home.dart';
 
 class ShoppingItemDetail extends StatelessWidget {
@@ -23,8 +22,6 @@ class ShoppingItemDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    //dynamic _ratingValue;
-    //Use an hashmap to store the five states of the Star IconButton
     return Consumer<HomeProvider>(
         builder: (context, provider, _) => Scaffold(
                 body: Padding(
@@ -42,12 +39,8 @@ class ShoppingItemDetail extends StatelessWidget {
                     },
                   ),
                   Expanded(
-                    child: SizedBox(
-                      //TODO(Replace with carousel)
-                      //height: screenSize.height * 0.4,
-                      child: ClipRect(child: Image.asset(_item.images.first)),
-                      width: screenSize.width,
-                    ),
+                    child: ShoppingItemImageCarousel(
+                        item: _item, screenSize: screenSize),
                   ),
                   Text(
                     _item.name,
@@ -59,25 +52,7 @@ class ShoppingItemDetail extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      RatingBar(
-                          initialRating: provider.getInitialShoppingItemRating(_index),
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          ratingWidget: RatingWidget(
-                              full:
-                                  const Icon(Icons.star, color: Colors.orange),
-                              half: const Icon(
-                                Icons.star_half,
-                                color: Colors.orange,
-                              ),
-                              empty: const Icon(
-                                Icons.star_outline,
-                                color: Colors.orange,
-                              )),
-                          onRatingUpdate: (value) {
-                            Provider.of<HomeProvider>(context, listen: false).setShoppingItemRating(_index, value);
-                          }),
+                      RatingBarWidget(index: _index),
                       Text(
                         "(${_item.noOfReviews} Reviews)",
                         style: const TextStyle(
@@ -95,14 +70,14 @@ class ShoppingItemDetail extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _item.newPrice,
+                        "N${_item.newPrice}",
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: Text(
-                          _item.oldPrice,
+                          "N${_item.oldPrice}",
                           style: const TextStyle(
                               fontSize: 14,
                               color: Colors.grey,
@@ -144,10 +119,8 @@ class ShoppingItemDetail extends StatelessWidget {
                       child: ShoppingItemSizeListView(_item.sizes, _index)),
                   Padding(
                     padding: const EdgeInsets.only(top: 24, bottom: 10),
-                    child: MaterialButton(
-                      padding: const EdgeInsets.all(16),
-                      minWidth: screenSize.width,
-                      color: Palette.primaryColor,
+                    child: ShoppingButton(
+                      buttonText: "Add to cart",
                       onPressed: () async {
                         Provider.of<ShoppingCartProvider>(context, listen: false).add(CartItem(
                           id: _item.id,
@@ -160,11 +133,6 @@ class ShoppingItemDetail extends StatelessWidget {
                         await Future.delayed(const Duration(seconds: 2));
                         Navigator.pop(context);
                       },
-                      textColor: Colors.white,
-                      child: const Text("Add to cart"),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14.0),
-                      ),
                     ),
                   ),
                 ],
